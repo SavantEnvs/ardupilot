@@ -1,0 +1,20 @@
+# Per-Dockerfile ignore list (BuildKit reads <Dockerfile>.dockerignore before the root one).
+# Upstream's root .dockerignore drops .git, libraries/, modules/, Tools/ ... — everything the
+# commit image must carry — so mayhem/Dockerfile uses this list instead.
+
+# ── Build outputs / local cruft ──────────────────────────────────────────────
+# Keep build artifacts out of the context — the COPY boundary is what separates
+# source from artifacts. build.sh produces its outputs under /mayhem at build time.
+# Adjust the patterns per project.
+build/
+out/
+*.o
+*.a
+*.so
+*.dylib
+**/__pycache__/
+
+# ── Editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.swp
+*~

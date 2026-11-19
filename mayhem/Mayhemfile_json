@@ -1,0 +1,11 @@
+project: savantenvs/ardupilot
+target: json
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/json/testsuite
+
+cmds:
+  - cmd: /mayhem/build/mayhem-fuzz/sitl/mayhem/fuzz_json @@
+    afl: true
+    timeout: 10

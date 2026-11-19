@@ -1,0 +1,11 @@
+project: savantenvs/ardupilot
+target: replay
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/replay/testsuite
+
+cmds:
+  - cmd: /mayhem/build/mayhem-fuzz/sitl/tool/Replay @@
+    afl: true
+    timeout: 10

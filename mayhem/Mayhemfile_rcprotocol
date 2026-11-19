@@ -1,0 +1,11 @@
+project: savantenvs/ardupilot
+target: rcprotocol
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/rcprotocol/testsuite
+
+cmds:
+  - cmd: /mayhem/build/mayhem-fuzz/sitl/mayhem/fuzz_rcprotocol @@
+    afl: true
+    timeout: 10

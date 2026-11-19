@@ -1,0 +1,27 @@
+# encoding: utf-8
+# flake8: noqa
+#
+# Mayhem fuzz harnesses. The top-level wscript recurses into every top-level directory that has a
+# wscript, so this builds the harnesses with the board's normal flags and libraries (the shared
+# 'ap' library, like libraries/*/examples) without touching any upstream file.
+# Build them with: ./waf build --target mayhem/<name>
+
+HARNESSES = [
+    'fuzz_rcprotocol',
+    'fuzz_json',
+    'fuzz_ftp_upload',
+    'fuzz_param_defaults',
+]
+
+def build(bld):
+    if bld.env.BOARD != 'sitl':
+        return
+    for name in HARNESSES:
+        bld.ap_program(
+            program_groups=['mayhem'],
+            program_name=name,
+            source=['harnesses/%s.cpp' % name],
+            use='ap',
+            use_legacy_defines=False,
+            vehicle_binary=False,
+        )

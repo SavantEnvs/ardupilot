@@ -1,0 +1,11 @@
+project: savantenvs/ardupilot
+target: ftp_upload
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/ftp_upload/testsuite
+
+cmds:
+  - cmd: /mayhem/build/mayhem-fuzz/sitl/mayhem/fuzz_ftp_upload @@
+    afl: true
+    timeout: 10

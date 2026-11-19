@@ -1,0 +1,11 @@
+project: savantenvs/ardupilot
+target: param_defaults
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/param_defaults/testsuite
+
+cmds:
+  - cmd: /mayhem/build/mayhem-fuzz/sitl/mayhem/fuzz_param_defaults @@
+    afl: true
+    timeout: 10
